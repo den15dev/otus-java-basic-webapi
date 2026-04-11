@@ -6,51 +6,80 @@ import java.util.Map;
 public class HttpRequest {
     private final String rawRequest;
     private HttpMethod method;
-    private String uri;
+    private String url;
     private Map<String, String> queryParams;
+    private Map<String, String> urlParams;
     private String body;
+
+
+    public HttpRequest(String rawRequest) {
+        this.urlParams = new HashMap<>();
+        this.rawRequest = rawRequest;
+        this.parse();
+    }
+
+
+    public HttpMethod getMethod() {
+        return method;
+    }
+
+
+    public String getUrl() {
+        return url;
+    }
+
 
     public String getBody() {
         return body;
     }
 
-    public String getUri() {
-        return uri;
+
+    public String getExactRouteKey() {
+        return method + " " + url;
     }
 
-    public String getRoutingKey() {
-        return method + " " + uri;
-    }
 
-    public String getParameter(String key) {
+    public String getQueryParameter(String key) {
         return queryParams.get(key);
     }
 
-    public HttpRequest(String rawRequest) {
-        this.rawRequest = rawRequest;
-        this.parse();
+
+    public Map<String, String> getUrlParams() {
+        return urlParams;
     }
+
+
+    public void setUrlParams(Map<String, String> pathVariables) {
+        this.urlParams = pathVariables;
+    }
+
+
+    public String getUrlParameter(String name) {
+        return urlParams.get(name);
+    }
+
 
     public void info(boolean showRawRequest) {
         if (showRawRequest) {
             System.out.println(rawRequest);
         }
         System.out.println("Method: " + method);
-        System.out.println("URI: " + uri);
+        System.out.println("URI: " + url);
         System.out.println("Parameters: " + queryParams);
         System.out.println("Body: " + body);
     }
+
 
     private void parse() {
         queryParams = new HashMap<>();
         int startIndex = rawRequest.indexOf(' ');
         int endIndex = rawRequest.indexOf(' ', startIndex + 1);
         method = HttpMethod.valueOf(rawRequest.substring(0, startIndex));
-        uri = rawRequest.substring(startIndex + 1, endIndex);
+        url = rawRequest.substring(startIndex + 1, endIndex);
 
-        if (uri.contains("?")) {
-            String[] elements = uri.split("[?]");
-            uri = elements[0];
+        if (url.contains("?")) {
+            String[] elements = url.split("[?]");
+            url = elements[0];
             String[] keysValues = elements[1].split("[&]");
             for (String o : keysValues) {
                 String[] keyValue = o.split("=");

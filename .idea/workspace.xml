@@ -4,23 +4,19 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="791e5894-1dfe-49ec-a123-7a67ea2a2bc0" name="Changes" comment="0.0.2. Setup app properties and compose file.">
-      <change afterPath="$PROJECT_DIR$/.idea/uiDesigner.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/ru/otus/java/basic/webapi/application/request/HttpMethod.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/ru/otus/java/basic/webapi/application/request/HttpRequest.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/ru/otus/java/basic/webapi/application/response/AbstractResponse.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/ru/otus/java/basic/webapi/application/response/HtmlResponse.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/ru/otus/java/basic/webapi/application/response/HttpStatus.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/ru/otus/java/basic/webapi/application/response/JsonResponse.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/ru/otus/java/basic/webapi/application/response/Response.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/ru/otus/java/basic/webapi/application/routing/ExactRoute.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/ru/otus/java/basic/webapi/application/routing/ParameterizedRoute.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/ru/otus/java/basic/webapi/application/routing/Route.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/ru/otus/java/basic/webapi/application/routing/RouteContainer.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/ru/otus/java/basic/webapi/controller/Controller.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/ru/otus/java/basic/webapi/controller/HelloController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/ru/otus/java/basic/webapi/route/Routes.java" afterDir="false" />
+    <list default="true" id="791e5894-1dfe-49ec-a123-7a67ea2a2bc0" name="Changes" comment="0.0.3. Add routing, request and response.">
+      <change afterPath="$PROJECT_DIR$/src/main/java/ru/otus/java/basic/webapi/application/Dispatcher.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/ru/otus/java/basic/webapi/controller/error/NotFoundController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/ru/otus/java/basic/webapi/controller/error/ServerErrorController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/ru/otus/java/basic/webapi/application/request/HttpRequest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ru/otus/java/basic/webapi/application/request/HttpRequest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/ru/otus/java/basic/webapi/application/response/AbstractResponse.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/ru/otus/java/basic/webapi/application/response/HtmlResponse.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ru/otus/java/basic/webapi/application/response/HtmlResponse.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/ru/otus/java/basic/webapi/application/response/JsonResponse.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ru/otus/java/basic/webapi/application/response/JsonResponse.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/ru/otus/java/basic/webapi/application/response/Response.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ru/otus/java/basic/webapi/application/response/Response.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/ru/otus/java/basic/webapi/controller/Controller.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ru/otus/java/basic/webapi/controller/Controller.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/ru/otus/java/basic/webapi/controller/HelloController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ru/otus/java/basic/webapi/controller/HelloController.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -74,6 +70,9 @@
       <recent name="E:\JavaProjects\otus_1_basics\otus-java-basic-webapi\src\main\java\ru\otus\java\basic\webapi\application\request" />
       <recent name="E:\JavaProjects\otus_1_basics\otus-java-basic-webapi\src\main\java\ru\otus\java\basic\webapi\application\response" />
     </key>
+    <key name="CopyClassDialog.RECENTS_KEY">
+      <recent name="ru.otus.java.basic.webapi.controller.error" />
+    </key>
   </component>
   <component name="RunManager">
     <configuration name="App" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
@@ -112,7 +111,7 @@
       <option name="presentableId" value="Default" />
       <updated>1775846801936</updated>
       <workItem from="1775846802943" duration="5323000" />
-      <workItem from="1775899252972" duration="9462000" />
+      <workItem from="1775899252972" duration="18299000" />
     </task>
     <task id="LOCAL-00001" summary="0.0.2. Setup app properties and compose file.">
       <option name="closed" value="true" />
@@ -122,15 +121,35 @@
       <option name="project" value="LOCAL" />
       <updated>1775850253239</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="0.0.3. Add routing, request and response.">
+      <option name="closed" value="true" />
+      <created>1775921485776</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1775921485776</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
   </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="0.0.2. Setup app properties and compose file." />
-    <option name="LAST_COMMIT_MESSAGE" value="0.0.2. Setup app properties and compose file." />
+    <MESSAGE value="0.0.3. Add routing, request and response." />
+    <option name="LAST_COMMIT_MESSAGE" value="0.0.3. Add routing, request and response." />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />

@@ -2,7 +2,7 @@ package ru.otus.java.basic.webapi.application.response;
 
 import java.nio.charset.StandardCharsets;
 
-public class HtmlResponse extends AbstractResponse {
+public class HtmlResponse extends Response {
     public HtmlResponse(String body) {
         this(HttpStatus.OK, body);
     }
