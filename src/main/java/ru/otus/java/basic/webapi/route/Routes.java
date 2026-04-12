@@ -13,7 +13,7 @@ public class Routes extends RouteContainer {
 
 
     private void load() {
-        add("GET", "/products", ProductShowController.class);
-        add("GET", "/products/{id}", ProductListController.class);
+        add("GET", "/products", ProductListController.class);
+        add("GET", "/products/{id}", ProductShowController.class);
     }
 }

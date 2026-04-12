@@ -2,15 +2,19 @@ package ru.otus.java.basic.webapi.repository;
 
 import ru.otus.java.basic.webapi.entity.Product;
 
+import java.time.Instant;
 import java.util.ArrayList;
 import java.util.List;
 
 public class ProductRepository {
     public Product getProductById(int id) {
         return new Product(
+                id,
                 "Молоко",
                 "Деревенское молоко, жирность 3,2%",
-                105
+                105,
+                Instant.now(),
+                Instant.now()
         );
     }
 

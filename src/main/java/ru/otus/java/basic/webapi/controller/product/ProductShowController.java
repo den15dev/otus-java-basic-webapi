@@ -18,7 +18,8 @@ public class ProductShowController extends Controller {
 
 
     public Response handle(HttpRequest request) {
-        Product product = productService.getProductById(2);
+        int id = Integer.parseInt(request.getUrlParameter("id"));
+        Product product = productService.getProductById(id);
 
         return new JsonResponse(product);
     }
