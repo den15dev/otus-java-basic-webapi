@@ -1,7 +1,8 @@
 package ru.otus.java.basic.webapi.route;
 
 import ru.otus.java.basic.webapi.application.routing.RouteContainer;
-import ru.otus.java.basic.webapi.controller.HelloController;
+import ru.otus.java.basic.webapi.controller.product.ProductListController;
+import ru.otus.java.basic.webapi.controller.product.ProductShowController;
 
 
 public class Routes extends RouteContainer {
@@ -12,7 +13,7 @@ public class Routes extends RouteContainer {
 
 
     private void load() {
-        add("GET", "/hello", new HelloController());
-        add("GET", "/calculator", new HelloController());
+        add("GET", "/products", ProductShowController.class);
+        add("GET", "/products/{id}", ProductListController.class);
     }
 }

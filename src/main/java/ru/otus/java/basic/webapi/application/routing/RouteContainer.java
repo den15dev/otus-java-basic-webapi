@@ -8,25 +8,25 @@ import java.util.List;
 import java.util.Map;
 
 public class RouteContainer {
-    private final Map<String, Controller> exactRoutes;
-    private final List<ParameterizedRoute> parameterRoutes;
+    private final Map<String, Class<? extends Controller>> routeMap;
+    private final List<Route> parameterizedRoutes;
 
 
     public RouteContainer() {
-        this.exactRoutes = new HashMap<>();
-        this.parameterRoutes = new ArrayList<>();
+        this.routeMap = new HashMap<>();
+        this.parameterizedRoutes = new ArrayList<>();
     }
 
 
-    protected void add(String method, String path, Controller controller) {
-        validate(method, path, controller);
+    protected void add(String method, String path, Class<? extends Controller> controllerClass) {
+        validate(method, path, controllerClass);
 
         if (path.contains("{") && path.contains("}")) {
-            parameterRoutes.add(new ParameterizedRoute(method, path, controller));
+            parameterizedRoutes.add(new Route(method, path, controllerClass));
 
         } else {
             String key = buildExactRouteKey(method, path);
-            exactRoutes.put(key, controller);
+            routeMap.put(key, controllerClass);
         }
     }
 
@@ -36,14 +36,14 @@ public class RouteContainer {
     }
 
 
-    private void validate(String method, String path, Controller controller) {
+    private void validate(String method, String path, Class<? extends Controller> controllerClass) {
         if (method == null || method.isBlank()) {
             throw new IllegalArgumentException("HTTP method must not be empty");
         }
         if (path == null || path.isBlank()) {
             throw new IllegalArgumentException("Path must not be empty");
         }
-        if (controller == null) {
+        if (controllerClass == null) {
             throw new IllegalArgumentException("Controller must not be null");
         }
     }
@@ -58,11 +58,11 @@ public class RouteContainer {
     }
 
 
-    public Map<String, Controller> getExactRoutes() {
-        return exactRoutes;
+    public Map<String, Class<? extends Controller>> getRouteMap() {
+        return routeMap;
     }
 
-    public List<ParameterizedRoute> getParameterizedRoutes() {
-        return parameterRoutes;
+    public List<Route> getParameterizedRoutes() {
+        return parameterizedRoutes;
     }
 }
