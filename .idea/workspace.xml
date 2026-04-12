@@ -4,15 +4,18 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="791e5894-1dfe-49ec-a123-7a67ea2a2bc0" name="Changes" comment="0.0.5. Add application context, add main app layers, refactor routing.">
-      <change afterPath="$PROJECT_DIR$/src/main/java/ru/otus/java/basic/webapi/application/HttpServer.java" afterDir="false" />
+    <list default="true" id="791e5894-1dfe-49ec-a123-7a67ea2a2bc0" name="Changes" comment="0.0.6. Add http server, fix timestamps returned by Gson.">
+      <change afterPath="$PROJECT_DIR$/src/main/resources/log4j2.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/ru/otus/java/basic/webapi/App.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ru/otus/java/basic/webapi/App.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/ru/otus/java/basic/webapi/application/response/JsonResponse.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ru/otus/java/basic/webapi/application/response/JsonResponse.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/ru/otus/java/basic/webapi/controller/HelloController.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/ru/otus/java/basic/webapi/application/Dispatcher.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ru/otus/java/basic/webapi/application/Dispatcher.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/ru/otus/java/basic/webapi/application/HttpServer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ru/otus/java/basic/webapi/application/HttpServer.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/ru/otus/java/basic/webapi/application/request/HttpRequest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ru/otus/java/basic/webapi/application/request/Request.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/ru/otus/java/basic/webapi/controller/Controller.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ru/otus/java/basic/webapi/controller/Controller.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/ru/otus/java/basic/webapi/controller/error/NotFoundController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ru/otus/java/basic/webapi/controller/error/NotFoundController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/ru/otus/java/basic/webapi/controller/error/ServerErrorController.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/ru/otus/java/basic/webapi/controller/product/ProductListController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ru/otus/java/basic/webapi/controller/product/ProductListController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/ru/otus/java/basic/webapi/controller/product/ProductShowController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ru/otus/java/basic/webapi/controller/product/ProductShowController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/ru/otus/java/basic/webapi/repository/ProductRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ru/otus/java/basic/webapi/repository/ProductRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/ru/otus/java/basic/webapi/route/Routes.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ru/otus/java/basic/webapi/route/Routes.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -113,7 +116,7 @@
       <updated>1775846801936</updated>
       <workItem from="1775846802943" duration="5323000" />
       <workItem from="1775899252972" duration="20932000" />
-      <workItem from="1775982840646" duration="17092000" />
+      <workItem from="1775982840646" duration="28386000" />
     </task>
     <task id="LOCAL-00001" summary="0.0.2. Setup app properties and compose file.">
       <option name="closed" value="true" />
@@ -147,7 +150,15 @@
       <option name="project" value="LOCAL" />
       <updated>1775998449087</updated>
     </task>
-    <option name="localTasksCounter" value="5" />
+    <task id="LOCAL-00005" summary="0.0.6. Add http server, fix timestamps returned by Gson.">
+      <option name="closed" value="true" />
+      <created>1776003111769</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1776003111769</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -169,7 +180,8 @@
     <MESSAGE value="0.0.3. Add routing, request and response." />
     <MESSAGE value="0.0.4. Add dispatcher, error controllers, refactor JsonResponse." />
     <MESSAGE value="0.0.5. Add application context, add main app layers, refactor routing." />
-    <option name="LAST_COMMIT_MESSAGE" value="0.0.5. Add application context, add main app layers, refactor routing." />
+    <MESSAGE value="0.0.6. Add http server, fix timestamps returned by Gson." />
+    <option name="LAST_COMMIT_MESSAGE" value="0.0.6. Add http server, fix timestamps returned by Gson." />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />

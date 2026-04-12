@@ -1,16 +1,23 @@
 package ru.otus.java.basic.webapi.application;
 
-import ru.otus.java.basic.webapi.application.request.HttpRequest;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+import ru.otus.java.basic.webapi.application.request.Request;
+import ru.otus.java.basic.webapi.application.response.HttpStatus;
+import ru.otus.java.basic.webapi.application.response.JsonResponse;
+import ru.otus.java.basic.webapi.application.response.Response;
 
 import java.io.IOException;
 import java.net.ServerSocket;
 import java.net.Socket;
+import java.util.Map;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
 public class HttpServer {
     private final Config config;
     private final Dispatcher dispatcher;
+    private static final Logger logger = LogManager.getLogger(HttpServer.class);
 
     public HttpServer(Config config) {
         this.config = config;
@@ -27,31 +34,41 @@ public class HttpServer {
 
             while (true) {
                 Socket socket = serverSocket.accept();
-
-                service.execute(() -> {
-                    try (Socket clientSocket = socket) {
-                        byte[] buffer = new byte[8192];
-                        int n = clientSocket.getInputStream().read(buffer);
-                        if (n < 1) {
-                            return;
-                        }
-
-                        String rawRequest = new String(buffer, 0, n);
-                        HttpRequest request = new HttpRequest(rawRequest);
-                        request.info(true);
-                        System.out.println("-----\n");
-
-                        dispatcher.dispatch(request, clientSocket.getOutputStream());
-
-                    } catch (IOException e) {
-                        System.err.println("An error has occurred during request handling: " + e.getMessage());
-                        throw new RuntimeException(e);
-                    }
-                });
+                service.execute(() -> handleClient(socket));
             }
 
         } catch (IOException e) {
-            e.printStackTrace();
+            logger.error("I/O error during starting the server", e);
+        }
+    }
+
+
+    private void handleClient(Socket socket) {
+        try (Socket clientSocket = socket) {
+            byte[] buffer = new byte[8192];
+            int n = clientSocket.getInputStream().read(buffer);
+            if (n < 1) {
+                return;
+            }
+
+            String rawRequest = new String(buffer, 0, n);
+
+            try {
+                Request request = new Request(rawRequest);
+                Response response = dispatcher.dispatch(request);
+                clientSocket.getOutputStream().write(response.getBytes());
+
+            } catch (Exception e) {
+                logger.error("Request handling failed", e);
+
+                Map<String, String> errorMessage = Map.of("message", "Internal Server Error");
+
+                Response response = new JsonResponse(HttpStatus.SERVER_ERROR, errorMessage);
+                clientSocket.getOutputStream().write(response.getBytes());
+            }
+
+        } catch (IOException e) {
+            logger.error("I/O error during client connection handling", e);
         }
     }
 }

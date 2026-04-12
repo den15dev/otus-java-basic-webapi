@@ -5,10 +5,8 @@ import ru.otus.java.basic.webapi.application.routing.Route;
 import ru.otus.java.basic.webapi.controller.Controller;
 import ru.otus.java.basic.webapi.controller.error.NotFoundController;
 import ru.otus.java.basic.webapi.route.Routes;
-import ru.otus.java.basic.webapi.application.request.HttpRequest;
+import ru.otus.java.basic.webapi.application.request.Request;
 
-import java.io.IOException;
-import java.io.OutputStream;
 import java.util.Map;
 
 public class Dispatcher {
@@ -24,18 +22,12 @@ public class Dispatcher {
     }
 
 
-    public void dispatch(HttpRequest request, OutputStream output) throws IOException {
-        Response response;
+    public Response dispatch(Request request) {
         String key = request.getExactRouteKey();
         Class<? extends Controller> controllerClass = routes.getRouteMap().get(key);
 
         if (controllerClass != null) {
-            response = appContext
-                .getController(controllerClass)
-                .handle(request);
-            output.write(response.getBytes());
-
-            return;
+            return appContext.getController(controllerClass).handle(request);
         }
 
         for (Route route : routes.getParameterizedRoutes()) {
@@ -44,16 +36,11 @@ public class Dispatcher {
             if (urlParams != null) {
                 request.setUrlParams(urlParams);
                 controllerClass = route.getControllerClass();
-                response = appContext
-                        .getController(controllerClass)
-                        .handle(request);
-                output.write(response.getBytes());
 
-                return;
+                return appContext.getController(controllerClass).handle(request);
             }
         }
 
-        response = notFoundController.handle(request);
-        output.write(response.getBytes());
+        return notFoundController.handle(null);
     }
 }

@@ -1,6 +1,6 @@
 package ru.otus.java.basic.webapi.controller.product;
 
-import ru.otus.java.basic.webapi.application.request.HttpRequest;
+import ru.otus.java.basic.webapi.application.request.Request;
 import ru.otus.java.basic.webapi.application.response.JsonResponse;
 import ru.otus.java.basic.webapi.application.response.Response;
 import ru.otus.java.basic.webapi.controller.Controller;
@@ -17,7 +17,7 @@ public class ProductShowController extends Controller {
     }
 
 
-    public Response handle(HttpRequest request) {
+    public Response handle(Request request) {
         int id = Integer.parseInt(request.getUrlParameter("id"));
         Product product = productService.getProductById(id);
 

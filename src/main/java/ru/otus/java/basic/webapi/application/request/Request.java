@@ -3,7 +3,7 @@ package ru.otus.java.basic.webapi.application.request;
 import java.util.HashMap;
 import java.util.Map;
 
-public class HttpRequest {
+public class Request {
     private final String rawRequest;
     private HttpMethod method;
     private String url;
@@ -12,12 +12,16 @@ public class HttpRequest {
     private String body;
 
 
-    public HttpRequest(String rawRequest) {
+    public Request(String rawRequest) {
         this.urlParams = new HashMap<>();
         this.rawRequest = rawRequest;
         this.parse();
     }
 
+
+    public String getRawRequest() {
+        return rawRequest;
+    }
 
     public HttpMethod getMethod() {
         return method;
@@ -56,17 +60,6 @@ public class HttpRequest {
 
     public String getUrlParameter(String name) {
         return urlParams.get(name);
-    }
-
-
-    public void info(boolean showRawRequest) {
-        if (showRawRequest) {
-            System.out.println(rawRequest);
-        }
-        System.out.println("Method: " + method);
-        System.out.println("URI: " + url);
-        System.out.println("Parameters: " + queryParams);
-        System.out.println("Body: " + body);
     }
 
 
