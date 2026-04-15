@@ -1,5 +1,6 @@
 package ru.otus.java.basic.webapi.repository;
 
+import ru.otus.java.basic.webapi.application.DataSource;
 import ru.otus.java.basic.webapi.entity.Product;
 
 import java.time.Instant;
@@ -7,6 +8,14 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ProductRepository {
+    private DataSource ds;
+
+
+    public ProductRepository(DataSource dataSource) {
+        this.ds = dataSource;
+    }
+
+
     public Product getProductById(int id) {
         return new Product(
                 id,

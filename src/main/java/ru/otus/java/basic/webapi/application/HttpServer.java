@@ -15,19 +15,20 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
 public class HttpServer {
-    private final Config config;
+    private final int port;
+    private final int threadNum;
     private final Dispatcher dispatcher;
     private static final Logger logger = LogManager.getLogger(HttpServer.class);
 
     public HttpServer(Config config) {
-        this.config = config;
-        this.dispatcher = new Dispatcher();
+        this.port = Integer.parseInt(config.get("server.port"));
+        this.threadNum = Integer.parseInt(config.get("server.thread-pool-size"));
+
+        ApplicationContext appContext = new ApplicationContext(config);
+        this.dispatcher = new Dispatcher(appContext);
     }
 
     public void start() {
-        int port = Integer.parseInt(config.get("server.port"));
-        int threadNum = Integer.parseInt(config.get("server.thread-pool-size"));
-
         try (ServerSocket serverSocket = new ServerSocket(port)) {
             System.out.println("Server started on port " + port);
             ExecutorService service = Executors.newFixedThreadPool(threadNum);

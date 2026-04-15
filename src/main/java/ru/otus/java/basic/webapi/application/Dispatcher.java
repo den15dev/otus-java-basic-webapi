@@ -15,9 +15,9 @@ public class Dispatcher {
     private final NotFoundController notFoundController;
 
 
-    public Dispatcher() {
+    public Dispatcher(ApplicationContext appContext) {
         this.routes = new Routes();
-        this.appContext = new ApplicationContext();
+        this.appContext = appContext;
         this.notFoundController = new NotFoundController();
     }
 

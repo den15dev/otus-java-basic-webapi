@@ -13,8 +13,9 @@ import java.util.Map;
 public class ApplicationContext {
     private final Map<Class<? extends Controller>, Controller> controllers;
 
-    public ApplicationContext() {
-        ProductRepository productRepository = new ProductRepository();
+    public ApplicationContext(Config config) {
+        DataSource dataSource = new DataSource(config);
+        ProductRepository productRepository = new ProductRepository(dataSource);
         ProductService productService = new ProductService(productRepository);
 
         this.controllers = new HashMap<>();
