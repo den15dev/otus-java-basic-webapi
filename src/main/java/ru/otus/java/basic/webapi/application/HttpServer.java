@@ -53,14 +53,19 @@ public class HttpServer {
             }
 
             String rawRequest = new String(buffer, 0, n);
+            Request request = new Request(rawRequest);
 
             try {
-                Request request = new Request(rawRequest);
                 Response response = dispatcher.dispatch(request);
                 clientSocket.getOutputStream().write(response.getBytes());
 
             } catch (Exception e) {
-                logger.error("Request handling failed", e);
+                logger.error(
+                        "Failed to handle: {} {}",
+                        request.getMethod(),
+                        request.getUrl(),
+                        e
+                );
 
                 Response response = new JsonResponse(
                         HttpStatus.SERVER_ERROR,

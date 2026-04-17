@@ -33,7 +33,7 @@ public class CategoryRepository {
 
             try (ResultSet rs = ps.executeQuery()) {
                 if (!rs.next()) {
-                    throw new SQLException("Failed to insert category: no id returned.");
+                    throw new SQLException("Failed to add a category: no id returned.");
                 }
 
                 return rs.getInt("id");

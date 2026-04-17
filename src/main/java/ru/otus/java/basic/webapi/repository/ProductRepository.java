@@ -80,7 +80,7 @@ public class ProductRepository {
 
             try (ResultSet rs = ps.executeQuery()) {
                 if (!rs.next()) {
-                    throw new SQLException("Failed to insert category: no id returned.");
+                    throw new SQLException("Failed to add a product: no id returned.");
                 }
 
                 return rs.getInt("id");

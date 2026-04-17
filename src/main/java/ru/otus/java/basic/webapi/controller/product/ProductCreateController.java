@@ -7,7 +7,6 @@ import ru.otus.java.basic.webapi.application.response.JsonResponse;
 import ru.otus.java.basic.webapi.application.response.Response;
 import ru.otus.java.basic.webapi.controller.Controller;
 import ru.otus.java.basic.webapi.dto.product.ProductInputDto;
-import ru.otus.java.basic.webapi.exception.DatabaseException;
 import ru.otus.java.basic.webapi.service.ProductService;
 
 import java.util.Map;
@@ -27,15 +26,7 @@ public class ProductCreateController extends Controller {
         ProductInputDto productDto = gson.fromJson(request.getBody(), ProductInputDto.class);
         int productId;
 
-        try {
-            productId = productService.addProduct(productDto);
-
-        } catch (DatabaseException e) {
-            return new JsonResponse(
-                    HttpStatus.SERVER_ERROR,
-                    Map.of("message", "Internal Server Error")
-            );
-        }
+        productId = productService.addProduct(productDto);
 
         return new JsonResponse(
                 HttpStatus.CREATED,

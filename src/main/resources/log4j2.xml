@@ -41,6 +41,9 @@
     </Appenders>
 
     <Loggers>
+        <Logger name="org.flywaydb" level="warn"/>
+        <Logger name="com.zaxxer.hikari" level="warn"/>
+
         <Root level="info">
             <AppenderRef ref="Console"/>
             <AppenderRef ref="AppFile"/>
