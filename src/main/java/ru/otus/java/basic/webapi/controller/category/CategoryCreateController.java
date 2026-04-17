@@ -6,7 +6,7 @@ import ru.otus.java.basic.webapi.application.response.HttpStatus;
 import ru.otus.java.basic.webapi.application.response.JsonResponse;
 import ru.otus.java.basic.webapi.application.response.Response;
 import ru.otus.java.basic.webapi.controller.Controller;
-import ru.otus.java.basic.webapi.dto.product.CategoryInputDto;
+import ru.otus.java.basic.webapi.dto.category.CategoryInputDto;
 import ru.otus.java.basic.webapi.service.CategoryService;
 
 import java.util.Map;

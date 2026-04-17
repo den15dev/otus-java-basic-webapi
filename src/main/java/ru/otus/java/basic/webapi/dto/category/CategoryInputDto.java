@@ -1,4 +1,4 @@
-package ru.otus.java.basic.webapi.dto.product;
+package ru.otus.java.basic.webapi.dto.category;
 
 public record CategoryInputDto(
         String name,

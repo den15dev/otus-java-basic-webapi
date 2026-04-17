@@ -1,5 +1,6 @@
 package ru.otus.java.basic.webapi.entity;
 
+import java.math.BigDecimal;
 import java.time.Instant;
 
 public final class Product {
@@ -7,7 +8,7 @@ public final class Product {
     private int categoryId;
     private String name;
     private String description;
-    private int price;
+    private BigDecimal price;
     private final Instant createdAt;
     private Instant updatedAt;
 
@@ -16,7 +17,7 @@ public final class Product {
             int categoryId,
             String name,
             String description,
-            int price
+            BigDecimal price
     ) {
         this.categoryId = categoryId;
         this.name = name;
@@ -32,7 +33,7 @@ public final class Product {
             int categoryId,
             String name,
             String description,
-            int price,
+            BigDecimal price,
             Instant createdAt,
             Instant updatedAt
     ) {
@@ -81,12 +82,12 @@ public final class Product {
     }
 
 
-    public int getPrice() {
+    public BigDecimal getPrice() {
         return price;
     }
 
 
-    public void setPrice(int price) {
+    public void setPrice(BigDecimal price) {
         this.price = price;
     }
 

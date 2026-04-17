@@ -1,7 +1,7 @@
 package ru.otus.java.basic.webapi.repository;
 
 import ru.otus.java.basic.webapi.application.DataSource;
-import ru.otus.java.basic.webapi.dto.product.CategoryInputDto;
+import ru.otus.java.basic.webapi.dto.category.CategoryInputDto;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;

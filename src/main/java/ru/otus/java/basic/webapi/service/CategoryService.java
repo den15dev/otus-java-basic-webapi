@@ -1,6 +1,6 @@
 package ru.otus.java.basic.webapi.service;
 
-import ru.otus.java.basic.webapi.dto.product.CategoryInputDto;
+import ru.otus.java.basic.webapi.dto.category.CategoryInputDto;
 import ru.otus.java.basic.webapi.exception.DatabaseException;
 import ru.otus.java.basic.webapi.repository.CategoryRepository;
 
