@@ -19,6 +19,7 @@ public class ProductListController extends Controller {
     }
 
 
+    @Override
     public Response handle(Request request) {
         List<Product> products = productService.getProducts();
 

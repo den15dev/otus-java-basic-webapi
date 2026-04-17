@@ -4,6 +4,7 @@ import java.time.Instant;
 
 public final class Product {
     private Integer id;
+    private int categoryId;
     private String name;
     private String description;
     private int price;
@@ -12,10 +13,12 @@ public final class Product {
 
     
     public Product(
+            int categoryId,
             String name,
             String description,
             int price
     ) {
+        this.categoryId = categoryId;
         this.name = name;
         this.description = description;
         this.price = price;
@@ -26,6 +29,7 @@ public final class Product {
 
     public Product(
             Integer id,
+            int categoryId,
             String name,
             String description,
             int price,
@@ -33,6 +37,7 @@ public final class Product {
             Instant updatedAt
     ) {
         this.id = id;
+        this.categoryId = categoryId;
         this.name = name;
         this.description = description;
         this.price = price;
@@ -43,6 +48,16 @@ public final class Product {
 
     public Integer getId() {
         return id;
+    }
+
+
+    public int getCategoryId() {
+        return categoryId;
+    }
+
+
+    public void setCategoryId(int categoryId) {
+        this.categoryId = categoryId;
     }
 
 

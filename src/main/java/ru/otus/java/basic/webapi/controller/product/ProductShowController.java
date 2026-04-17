@@ -17,6 +17,7 @@ public class ProductShowController extends Controller {
     }
 
 
+    @Override
     public Response handle(Request request) {
         int id = Integer.parseInt(request.getUrlParameter("id"));
         Product product = productService.getProductById(id);

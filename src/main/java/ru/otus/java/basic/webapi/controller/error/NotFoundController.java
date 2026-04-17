@@ -10,8 +10,9 @@ import java.util.Map;
 
 public class NotFoundController extends Controller {
     public Response handle(Request request) {
-        Map<String, String> out = Map.of("message", "Not Found");
-
-        return new JsonResponse(HttpStatus.NOT_FOUND, out);
+        return new JsonResponse(
+                HttpStatus.NOT_FOUND,
+                Map.of("message", "Not Found")
+        );
     }
 }

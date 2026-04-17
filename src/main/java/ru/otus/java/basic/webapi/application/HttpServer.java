@@ -62,9 +62,10 @@ public class HttpServer {
             } catch (Exception e) {
                 logger.error("Request handling failed", e);
 
-                Map<String, String> errorMessage = Map.of("message", "Internal Server Error");
-
-                Response response = new JsonResponse(HttpStatus.SERVER_ERROR, errorMessage);
+                Response response = new JsonResponse(
+                        HttpStatus.SERVER_ERROR,
+                        Map.of("message", "Internal Server Error")
+                );
                 clientSocket.getOutputStream().write(response.getBytes());
             }
 
