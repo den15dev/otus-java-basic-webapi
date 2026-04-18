@@ -1,8 +1,9 @@
 package ru.otus.java.basic.webapi.service;
 
+import ru.otus.java.basic.webapi.dto.product.ProductFilter;
 import ru.otus.java.basic.webapi.dto.product.ProductInputDto;
+import ru.otus.java.basic.webapi.dto.product.ProductListDto;
 import ru.otus.java.basic.webapi.dto.product.ProductShowDto;
-import ru.otus.java.basic.webapi.entity.Product;
 import ru.otus.java.basic.webapi.exception.DatabaseException;
 import ru.otus.java.basic.webapi.exception.ResourceNotFoundException;
 import ru.otus.java.basic.webapi.repository.ProductRepository;
@@ -35,8 +36,13 @@ public class ProductService {
     }
 
 
-    public List<Product> getProducts() {
-        return productRepository.getProducts();
+    public List<ProductListDto> getProducts(ProductFilter filter) {
+        try {
+            return productRepository.getProducts(filter);
+
+        } catch (SQLException e) {
+            throw new DatabaseException("Failed to get product list", e);
+        }
     }
 
 

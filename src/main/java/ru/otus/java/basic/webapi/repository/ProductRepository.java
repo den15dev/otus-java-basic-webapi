@@ -2,11 +2,11 @@ package ru.otus.java.basic.webapi.repository;
 
 import ru.otus.java.basic.webapi.application.DataSource;
 import ru.otus.java.basic.webapi.dto.category.CategoryShowDto;
+import ru.otus.java.basic.webapi.dto.product.ProductFilter;
 import ru.otus.java.basic.webapi.dto.product.ProductInputDto;
+import ru.otus.java.basic.webapi.dto.product.ProductListDto;
 import ru.otus.java.basic.webapi.dto.product.ProductShowDto;
-import ru.otus.java.basic.webapi.entity.Product;
 
-import java.math.BigDecimal;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -72,29 +72,72 @@ public class ProductRepository {
     }
 
 
-    public List<Product> getProducts() {
-        List<Product> products = new ArrayList<>();
+    public List<ProductListDto> getProducts(ProductFilter filter) throws SQLException {
+        StringBuilder sql = new StringBuilder("""
+                    SELECT
+                        p.id,
+                        p.category_id,
+                        c.id AS category_id,
+                        c.name AS category_name,
+                        c.slug AS category_slug,
+                        p.name,
+                        p.description,
+                        p.price,
+                        p.created_at,
+                        p.updated_at
+                    FROM products p
+                    JOIN categories c ON c.id = p.category_id
+                    WHERE 1 = 1
+                    """);
 
-        products.add(new Product(
-                1,
-                "Молоко",
-                "Деревенское молоко, жирность 3,2%",
-                new BigDecimal(105)
-        ));
+        List<Object> params = new ArrayList<>();
 
-        products.add(new Product(
-                2,
-                "Колбаса Докторская",
-                "Докторская колбаса по ГОСТу 1936. Говядина высший сорт без жил.",
-                new BigDecimal(235)
-        ));
+        if (filter.categoryId() != null) {
+            sql.append(" AND category_id = ?");
+            params.add(filter.categoryId());
+        }
 
-        products.add(new Product(
-                3,
-                "Хлеб пшеничный",
-                "Пшеничный формовой хлеб по ГОСТу из муки высшего сорта.",
-                new BigDecimal(85)
-        ));
+        if (filter.minPrice() != null) {
+            sql.append(" AND price >= ?");
+            params.add(filter.minPrice());
+        }
+
+        if (filter.maxPrice() != null) {
+            sql.append(" AND price <= ?");
+            params.add(filter.maxPrice());
+        }
+
+        sql.append(" ORDER BY created_at DESC");
+
+        List<ProductListDto> products = new ArrayList<>();
+
+        try (
+                Connection conn = ds.getConnection();
+                PreparedStatement ps = conn.prepareStatement(sql.toString())
+        ) {
+            for (int i = 0; i < params.size(); i++) {
+                ps.setObject(i + 1, params.get(i));
+            }
+
+            try (ResultSet rs = ps.executeQuery()) {
+                while (rs.next()) {
+                    CategoryShowDto category = new CategoryShowDto(
+                            rs.getInt("category_id"),
+                            rs.getString("category_name"),
+                            rs.getString("category_slug")
+                    );
+
+                    products.add(new ProductListDto(
+                            rs.getInt("id"),
+                            category,
+                            rs.getString("name"),
+                            rs.getBigDecimal("price"),
+                            rs.getTimestamp("created_at").toInstant(),
+                            rs.getTimestamp("updated_at").toInstant()
+                    ));
+                }
+            }
+        }
 
         return products;
     }

@@ -10,12 +10,14 @@ public class Request {
     private Map<String, String> queryParams;
     private Map<String, String> urlParams;
     private String body;
+    private final QueryParser queryParser;
 
 
     public Request(String rawRequest) {
         this.urlParams = new HashMap<>();
         this.rawRequest = rawRequest;
         this.parse();
+        this.queryParser = new QueryParser(queryParams);
     }
 
 
@@ -43,10 +45,19 @@ public class Request {
     }
 
 
+    public Map<String, String> getQueryParams() {
+        return queryParams;
+    }
+
+
     public String getQueryParameter(String key) {
         return queryParams.get(key);
     }
 
+
+    public QueryParser parseQuery() {
+        return queryParser;
+    }
 
     public Map<String, String> getUrlParams() {
         return urlParams;
