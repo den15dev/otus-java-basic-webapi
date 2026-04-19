@@ -23,8 +23,8 @@ public class Dispatcher {
 
 
     public Response dispatch(Request request) {
-        String key = request.getExactRouteKey();
-        Class<? extends Controller> controllerClass = routes.getRouteMap().get(key);
+        String routeKey = request.getExactRouteKey();
+        Class<? extends Controller> controllerClass = routes.getRouteMap().get(routeKey);
 
         if (controllerClass != null) {
             return appContext.getController(controllerClass).handle(request);

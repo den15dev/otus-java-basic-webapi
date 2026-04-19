@@ -21,7 +21,7 @@ public class QueryParser {
     }
 
 
-    public Integer getInt(String name) {
+    public Integer getInt(String name) throws BadRequestException {
         String value = get(name);
         if (value == null) {
             return null;
@@ -36,7 +36,7 @@ public class QueryParser {
     }
 
 
-    public BigDecimal getBigDecimal(String name) {
+    public BigDecimal getBigDecimal(String name) throws BadRequestException {
         String value = get(name);
         if (value == null) {
             return null;
@@ -51,7 +51,7 @@ public class QueryParser {
     }
 
 
-    public Instant getInstant(String name) {
+    public Instant getInstant(String name) throws BadRequestException {
         String value = get(name);
         if (value == null) {
             return null;

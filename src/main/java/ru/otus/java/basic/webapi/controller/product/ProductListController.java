@@ -1,13 +1,12 @@
 package ru.otus.java.basic.webapi.controller.product;
 
+import ru.otus.java.basic.webapi.application.exception.HttpException;
 import ru.otus.java.basic.webapi.application.request.Request;
-import ru.otus.java.basic.webapi.application.response.HttpStatus;
 import ru.otus.java.basic.webapi.application.response.JsonResponse;
 import ru.otus.java.basic.webapi.application.response.Response;
 import ru.otus.java.basic.webapi.controller.Controller;
 import ru.otus.java.basic.webapi.dto.product.ProductFilter;
 import ru.otus.java.basic.webapi.dto.product.ProductListDto;
-import ru.otus.java.basic.webapi.exception.BadRequestException;
 import ru.otus.java.basic.webapi.service.ProductService;
 
 import java.util.List;
@@ -36,9 +35,9 @@ public class ProductListController extends Controller {
 
             return new JsonResponse(products);
 
-        } catch (BadRequestException e) {
+        } catch (HttpException e) {
             return new JsonResponse(
-                    HttpStatus.BAD_REQUEST,
+                    e.getStatus(),
                     Map.of("message", e.getMessage())
             );
         }

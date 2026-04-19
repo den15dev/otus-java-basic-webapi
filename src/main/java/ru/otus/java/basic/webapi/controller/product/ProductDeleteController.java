@@ -1,12 +1,11 @@
 package ru.otus.java.basic.webapi.controller.product;
 
+import ru.otus.java.basic.webapi.application.exception.HttpException;
 import ru.otus.java.basic.webapi.application.request.Request;
-import ru.otus.java.basic.webapi.application.response.HttpStatus;
 import ru.otus.java.basic.webapi.application.response.JsonResponse;
 import ru.otus.java.basic.webapi.application.response.NoContentResponse;
 import ru.otus.java.basic.webapi.application.response.Response;
 import ru.otus.java.basic.webapi.controller.Controller;
-import ru.otus.java.basic.webapi.exception.ResourceNotFoundException;
 import ru.otus.java.basic.webapi.service.ProductService;
 
 import java.util.Map;
@@ -29,8 +28,11 @@ public class ProductDeleteController extends Controller {
 
             return new NoContentResponse();
 
-        } catch (ResourceNotFoundException e) {
-            return new JsonResponse(HttpStatus.NOT_FOUND, Map.of("message", e.getMessage()));
+        } catch (HttpException e) {
+            return new JsonResponse(
+                    e.getStatus(),
+                    Map.of("message", e.getMessage())
+            );
         }
     }
 }

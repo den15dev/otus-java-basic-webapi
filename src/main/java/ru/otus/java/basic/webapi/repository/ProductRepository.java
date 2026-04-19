@@ -1,6 +1,6 @@
 package ru.otus.java.basic.webapi.repository;
 
-import ru.otus.java.basic.webapi.application.DataSource;
+import ru.otus.java.basic.webapi.application.database.DataSource;
 import ru.otus.java.basic.webapi.dto.category.CategoryShowDto;
 import ru.otus.java.basic.webapi.dto.product.ProductFilter;
 import ru.otus.java.basic.webapi.dto.product.ProductInputDto;

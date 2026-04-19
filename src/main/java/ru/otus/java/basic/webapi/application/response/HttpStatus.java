@@ -6,6 +6,7 @@ public enum HttpStatus {
     NO_CONTENT(204, "No Content"),
     BAD_REQUEST(400, "Bad Request"),
     NOT_FOUND(404, "Not Found"),
+    REQUEST_TOO_LARGE(413, "Request Too Large"),
     SERVER_ERROR(500, "Internal Server Error");
 
     private final int code;

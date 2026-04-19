@@ -20,7 +20,7 @@ public class ProductService {
     }
 
 
-    public ProductShowDto getProductWithDetailsById(int id) {
+    public ProductShowDto getProductWithDetailsById(int id) throws ResourceNotFoundException {
         try {
             ProductShowDto product = productRepository.getProductWithDetailsById(id);
 
@@ -56,7 +56,7 @@ public class ProductService {
     }
 
 
-    public void updateProduct(int id, ProductInputDto productData) {
+    public void updateProduct(int id, ProductInputDto productData) throws ResourceNotFoundException {
         try {
             int updated = productRepository.updateProduct(id, productData);
 
@@ -70,7 +70,7 @@ public class ProductService {
     }
 
 
-    public void deleteProduct(int id) {
+    public void deleteProduct(int id) throws ResourceNotFoundException {
         try {
             if (!productRepository.deleteProduct(id)) {
                 throw new ResourceNotFoundException("Product not found");

@@ -1,7 +1,7 @@
 package ru.otus.java.basic.webapi;
 
 import ru.otus.java.basic.webapi.application.Config;
-import ru.otus.java.basic.webapi.application.DatabaseMigrator;
+import ru.otus.java.basic.webapi.application.database.DatabaseMigrator;
 import ru.otus.java.basic.webapi.application.HttpServer;
 
 public class App {
