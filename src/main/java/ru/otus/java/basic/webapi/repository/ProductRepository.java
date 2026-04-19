@@ -143,7 +143,7 @@ public class ProductRepository {
     }
 
 
-    public int addProduct(ProductInputDto productDto) throws SQLException {
+    public int addProduct(ProductInputDto productData) throws SQLException {
         String sql = """
             INSERT INTO products (category_id, name, description, price, created_at, updated_at)
             VALUES (?, ?, ?, ?, NOW(), NOW())
@@ -154,10 +154,10 @@ public class ProductRepository {
                 Connection conn = ds.getConnection();
                 PreparedStatement ps = conn.prepareStatement(sql)
         ) {
-            ps.setInt(1, productDto.categoryId());
-            ps.setString(2, productDto.name());
-            ps.setString(3, productDto.description());
-            ps.setBigDecimal(4, productDto.price());
+            ps.setInt(1, productData.categoryId());
+            ps.setString(2, productData.name());
+            ps.setString(3, productData.description());
+            ps.setBigDecimal(4, productData.price());
 
             try (ResultSet rs = ps.executeQuery()) {
                 if (!rs.next()) {
@@ -166,6 +166,45 @@ public class ProductRepository {
 
                 return rs.getInt("id");
             }
+        }
+    }
+
+
+    public int updateProduct(int id, ProductInputDto productData) throws SQLException {
+        String sql = """
+            UPDATE products
+            SET category_id = ?,
+                name = ?,
+                description = ?,
+                price = ?,
+                updated_at = NOW()
+            WHERE id = ?
+            """;
+
+        try (
+                Connection conn = ds.getConnection();
+                PreparedStatement ps = conn.prepareStatement(sql)
+        ) {
+            ps.setInt(1, productData.categoryId());
+            ps.setString(2, productData.name());
+            ps.setString(3, productData.description());
+            ps.setBigDecimal(4, productData.price());
+            ps.setInt(5, id);
+
+            return ps.executeUpdate();
+        }
+    }
+
+
+    public boolean deleteProduct(int id) throws SQLException {
+        String sql = "DELETE FROM products WHERE id = ?";
+
+        try (
+                Connection conn = ds.getConnection();
+                PreparedStatement ps = conn.prepareStatement(sql)
+        ) {
+            ps.setInt(1, id);
+            return ps.executeUpdate() > 0;
         }
     }
 }

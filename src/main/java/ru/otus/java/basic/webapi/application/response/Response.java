@@ -15,7 +15,7 @@ public class Response {
     }
 
 
-    Response(HttpStatus status, String body) {
+    public Response(HttpStatus status, String body) {
         this.status = status;
         this.body = body;
         this.headers = new HashMap<>();
@@ -37,14 +37,25 @@ public class Response {
 
         for (String header : this.headers.keySet()) {
             headersBuilder.append(header)
-                .append(": ")
-                .append(this.headers.get(header))
-                .append("\n");
+                    .append(": ")
+                    .append(this.headers.get(header))
+                    .append("\r\n");
         }
 
-        return "HTTP/1.1 " + status.getCode() + " " + status.getMessage() + "\r\n" +
-                headersBuilder + "\r\n" +
-                body;
+        StringBuilder response = new StringBuilder();
+        response.append("HTTP/1.1 ")
+                .append(status.getCode())
+                .append(" ")
+                .append(status.getMessage())
+                .append("\r\n")
+                .append(headersBuilder)
+                .append("\r\n");
+
+        if (body != null) {
+            response.append(body);
+        }
+
+        return response.toString();
     }
 
 

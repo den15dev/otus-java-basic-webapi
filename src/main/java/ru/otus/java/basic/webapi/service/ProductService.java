@@ -31,7 +31,7 @@ public class ProductService {
             return product;
 
         } catch (SQLException e) {
-            throw new DatabaseException("Failed to get a product " + id, e);
+            throw new DatabaseException("Failed to get product " + id, e);
         }
     }
 
@@ -46,12 +46,38 @@ public class ProductService {
     }
 
 
-    public int addProduct(ProductInputDto productDto) {
+    public int addProduct(ProductInputDto productData) {
         try {
-            return productRepository.addProduct(productDto);
+            return productRepository.addProduct(productData);
 
         } catch (SQLException e) {
             throw new DatabaseException("Failed to add a product", e);
+        }
+    }
+
+
+    public void updateProduct(int id, ProductInputDto productData) {
+        try {
+            int updated = productRepository.updateProduct(id, productData);
+
+            if (updated == 0) {
+                throw new ResourceNotFoundException("Product not found");
+            }
+
+        } catch (SQLException e) {
+            throw new DatabaseException("Failed to update product " + id, e);
+        }
+    }
+
+
+    public void deleteProduct(int id) {
+        try {
+            if (!productRepository.deleteProduct(id)) {
+                throw new ResourceNotFoundException("Product not found");
+            }
+
+        } catch (SQLException e) {
+            throw new DatabaseException("Failed to delete product " + id, e);
         }
     }
 }

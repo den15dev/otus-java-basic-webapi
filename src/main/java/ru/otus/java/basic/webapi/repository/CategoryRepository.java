@@ -17,7 +17,7 @@ public class CategoryRepository {
     }
 
 
-    public int addCategory(CategoryInputDto categoryDto) throws SQLException {
+    public int addCategory(CategoryInputDto categoryData) throws SQLException {
         String sql = """
             INSERT INTO categories (name, slug)
             VALUES (?, ?)
@@ -28,8 +28,8 @@ public class CategoryRepository {
                 Connection conn = ds.getConnection();
                 PreparedStatement ps = conn.prepareStatement(sql)
         ) {
-            ps.setString(1, categoryDto.name());
-            ps.setString(2, categoryDto.slug());
+            ps.setString(1, categoryData.name());
+            ps.setString(2, categoryData.slug());
 
             try (ResultSet rs = ps.executeQuery()) {
                 if (!rs.next()) {

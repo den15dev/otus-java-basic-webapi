@@ -15,9 +15,9 @@ public class CategoryService {
     }
 
 
-    public int addCategory(CategoryInputDto categoryDto) {
+    public int addCategory(CategoryInputDto categoryData) {
         try {
-            return categoryRepository.addCategory(categoryDto);
+            return categoryRepository.addCategory(categoryData);
 
         } catch (SQLException e) {
             throw new DatabaseException("Failed to add a category", e);
