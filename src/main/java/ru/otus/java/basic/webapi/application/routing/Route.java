@@ -68,6 +68,15 @@ public class Route {
 
             if (templatePart.startsWith("{") && templatePart.endsWith("}")) {
                 String varName = templatePart.substring(1, templatePart.length() - 1);
+
+                if (varName.equals("id")) {
+                    try {
+                        Integer.parseInt(requestPart);
+                    } catch (NumberFormatException e) {
+                        return null;
+                    }
+                }
+
                 pathVariables.put(varName, requestPart);
 
             } else if (!templatePart.equals(requestPart)) {
