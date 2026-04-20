@@ -10,6 +10,11 @@ public class Response {
     private final Map<String, String> headers;
 
 
+    public Response() {
+        this(HttpStatus.OK, null);
+    }
+
+
     public Response(String body) {
         this(HttpStatus.OK, body);
     }

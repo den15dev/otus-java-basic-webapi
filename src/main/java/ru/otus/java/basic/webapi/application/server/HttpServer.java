@@ -1,7 +1,10 @@
-package ru.otus.java.basic.webapi.application;
+package ru.otus.java.basic.webapi.application.server;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import ru.otus.java.basic.webapi.application.ApplicationContext;
+import ru.otus.java.basic.webapi.application.Config;
+import ru.otus.java.basic.webapi.application.Dispatcher;
 import ru.otus.java.basic.webapi.application.exception.RequestTooLargeException;
 import ru.otus.java.basic.webapi.application.request.Request;
 import ru.otus.java.basic.webapi.application.response.HttpStatus;
@@ -12,6 +15,9 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.net.ServerSocket;
 import java.net.Socket;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.Map;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
@@ -21,6 +27,7 @@ public class HttpServer {
     private final int threadNum;
     private final int requestMaxSize;
     private final RequestReader requestReader;
+    private final FileSender fileSender;
     private final Dispatcher dispatcher;
     private static final Logger logger = LogManager.getLogger(HttpServer.class);
 
@@ -29,7 +36,9 @@ public class HttpServer {
         this.port = Integer.parseInt(config.get("server.port"));
         this.threadNum = Integer.parseInt(config.get("server.thread-pool-size"));
         this.requestMaxSize = Integer.parseInt(config.get("http.max-request-size-bytes"));
+
         this.requestReader = new RequestReader();
+        this.fileSender = new FileSender();
 
         ApplicationContext appContext = new ApplicationContext(config);
         this.dispatcher = new Dispatcher(appContext);
@@ -55,7 +64,9 @@ public class HttpServer {
     private void handleClient(Socket socket) {
         try (Socket clientSocket = socket) {
             Request request;
+            Response response;
 
+            // Read request, check that it didn't exceed max size
             try {
                 InputStream inputStream = clientSocket.getInputStream();
                 request = requestReader.read(inputStream, requestMaxSize);
@@ -67,7 +78,7 @@ public class HttpServer {
             } catch (RequestTooLargeException e) {
                 logger.warn(e.getMessage());
 
-                Response response = new JsonResponse(
+                response = new JsonResponse(
                         HttpStatus.REQUEST_TOO_LARGE,
                         Map.of("message", "Request Entity Too Large")
                 );
@@ -76,8 +87,20 @@ public class HttpServer {
                 return;
             }
 
+            // Handle static files
+            String filename = request.getUrl().substring(1);
+            Path baseDir = Paths.get("static").toAbsolutePath();
+            Path filePath = baseDir.resolve(filename).normalize();
+
+            if (filePath.startsWith(baseDir) && Files.exists(filePath) && !Files.isDirectory(filePath)) {
+                fileSender.send(filePath, socket.getOutputStream());
+
+                return;
+            }
+
+            // Handle app request
             try {
-                Response response = dispatcher.dispatch(request);
+                response = dispatcher.dispatch(request);
                 clientSocket.getOutputStream().write(response.getBytes());
 
             } catch (Exception e) {
@@ -88,7 +111,7 @@ public class HttpServer {
                         e
                 );
 
-                Response response = new JsonResponse(
+                response = new JsonResponse(
                         HttpStatus.SERVER_ERROR,
                         Map.of("message", "Internal Server Error")
                 );

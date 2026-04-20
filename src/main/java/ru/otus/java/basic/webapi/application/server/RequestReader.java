@@ -1,4 +1,4 @@
-package ru.otus.java.basic.webapi.application;
+package ru.otus.java.basic.webapi.application.server;
 
 import ru.otus.java.basic.webapi.application.exception.RequestTooLargeException;
 import ru.otus.java.basic.webapi.application.request.Request;
