@@ -26,7 +26,7 @@ public class HttpServer {
     private final int port;
     private final int threadNum;
     private final int requestMaxSize;
-    private final RequestReader requestReader;
+    private final RequestParser requestParser;
     private final FileSender fileSender;
     private final Dispatcher dispatcher;
     private static final Logger logger = LogManager.getLogger(HttpServer.class);
@@ -37,7 +37,7 @@ public class HttpServer {
         this.threadNum = Integer.parseInt(config.get("server.thread-pool-size"));
         this.requestMaxSize = Integer.parseInt(config.get("http.max-request-size-bytes"));
 
-        this.requestReader = new RequestReader();
+        this.requestParser = new RequestParser();
         this.fileSender = new FileSender();
 
         ApplicationContext appContext = new ApplicationContext(config);
@@ -69,7 +69,7 @@ public class HttpServer {
             // Read request, check that it didn't exceed max size
             try {
                 InputStream inputStream = clientSocket.getInputStream();
-                request = requestReader.read(inputStream, requestMaxSize);
+                request = requestParser.getRequest(inputStream, requestMaxSize);
 
                 if (request == null) {
                     return;

@@ -4,26 +4,29 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class Request {
-    private final String rawRequest;
-    private HttpMethod method;
-    private String url;
-    private Map<String, String> queryParams;
+    private final HttpMethod method;
+    private final String url;
+    private final Map<String, String> queryParams;
     private Map<String, String> urlParams;
-    private String body;
+    private final String body;
     private final QueryParser queryParser;
 
 
-    public Request(String rawRequest) {
+    public Request(
+            HttpMethod method,
+            String url,
+            Map<String, String> queryParams,
+            String body
+    ) {
+        this.method = method;
+        this.url = url;
+        this.queryParams = queryParams;
+        this.body = body;
+
         this.urlParams = new HashMap<>();
-        this.rawRequest = rawRequest;
-        this.parse();
         this.queryParser = new QueryParser(queryParams);
     }
 
-
-    public String getRawRequest() {
-        return rawRequest;
-    }
 
     public HttpMethod getMethod() {
         return method;
@@ -45,11 +48,6 @@ public class Request {
     }
 
 
-    public Map<String, String> getQueryParams() {
-        return queryParams;
-    }
-
-
     public String getQueryParameter(String key) {
         return queryParams.get(key);
     }
@@ -57,10 +55,6 @@ public class Request {
 
     public QueryParser parseQuery() {
         return queryParser;
-    }
-
-    public Map<String, String> getUrlParams() {
-        return urlParams;
     }
 
 
@@ -71,28 +65,5 @@ public class Request {
 
     public String getUrlParameter(String name) {
         return urlParams.get(name);
-    }
-
-
-    private void parse() {
-        queryParams = new HashMap<>();
-        int startIndex = rawRequest.indexOf(' ');
-        int endIndex = rawRequest.indexOf(' ', startIndex + 1);
-        method = HttpMethod.valueOf(rawRequest.substring(0, startIndex));
-        url = rawRequest.substring(startIndex + 1, endIndex);
-
-        if (url.contains("?")) {
-            String[] elements = url.split("[?]");
-            url = elements[0];
-            String[] keysValues = elements[1].split("[&]");
-            for (String o : keysValues) {
-                String[] keyValue = o.split("=");
-                queryParams.put(keyValue[0], keyValue[1]);
-            }
-        }
-
-        if (method == HttpMethod.POST || method == HttpMethod.PUT) {
-            body = rawRequest.substring(rawRequest.indexOf("\r\n\r\n") + 4);
-        }
     }
 }

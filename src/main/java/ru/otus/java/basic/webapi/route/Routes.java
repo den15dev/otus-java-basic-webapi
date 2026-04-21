@@ -18,7 +18,7 @@ public class Routes extends RouteContainer {
         add("GET", "/products", ProductListController.class);
         add("GET", "/products/{id}", ProductShowController.class);
         add("POST", "/products", ProductCreateController.class);
-        add("POST", "/products/{id}", ProductUpdateController.class);
+        add("PUT", "/products/{id}", ProductUpdateController.class);
         add("DELETE", "/products/{id}", ProductDeleteController.class);
     }
 }
