@@ -1,15 +1,15 @@
-package ru.otus.java.basic.webapi.application.server;
+package ru.otus.java.basic.webapi.core.server;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import ru.otus.java.basic.webapi.application.ApplicationContext;
-import ru.otus.java.basic.webapi.application.Config;
-import ru.otus.java.basic.webapi.application.Dispatcher;
-import ru.otus.java.basic.webapi.application.exception.RequestTooLargeException;
-import ru.otus.java.basic.webapi.application.request.Request;
-import ru.otus.java.basic.webapi.application.response.HttpStatus;
-import ru.otus.java.basic.webapi.application.response.JsonResponse;
-import ru.otus.java.basic.webapi.application.response.Response;
+import ru.otus.java.basic.webapi.core.ApplicationContext;
+import ru.otus.java.basic.webapi.core.Config;
+import ru.otus.java.basic.webapi.core.Dispatcher;
+import ru.otus.java.basic.webapi.core.exception.RequestTooLargeException;
+import ru.otus.java.basic.webapi.core.request.Request;
+import ru.otus.java.basic.webapi.core.response.HttpStatus;
+import ru.otus.java.basic.webapi.core.response.JsonResponse;
+import ru.otus.java.basic.webapi.core.response.Response;
 
 import java.io.IOException;
 import java.io.InputStream;

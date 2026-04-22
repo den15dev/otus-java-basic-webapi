@@ -1,6 +1,6 @@
-package ru.otus.java.basic.webapi.application.routing;
+package ru.otus.java.basic.webapi.core.routing;
 
-import ru.otus.java.basic.webapi.application.request.HttpMethod;
+import ru.otus.java.basic.webapi.core.request.HttpMethod;
 import ru.otus.java.basic.webapi.controller.Controller;
 
 import java.util.Arrays;

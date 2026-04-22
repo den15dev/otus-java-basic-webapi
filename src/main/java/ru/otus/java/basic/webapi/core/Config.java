@@ -1,4 +1,4 @@
-package ru.otus.java.basic.webapi.application;
+package ru.otus.java.basic.webapi.core;
 
 import java.util.Properties;
 import java.io.IOException;

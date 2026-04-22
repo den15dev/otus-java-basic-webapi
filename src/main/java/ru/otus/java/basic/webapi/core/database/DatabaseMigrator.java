@@ -1,7 +1,7 @@
-package ru.otus.java.basic.webapi.application.database;
+package ru.otus.java.basic.webapi.core.database;
 
 import org.flywaydb.core.Flyway;
-import ru.otus.java.basic.webapi.application.Config;
+import ru.otus.java.basic.webapi.core.Config;
 
 public class DatabaseMigrator {
     private final Config config;

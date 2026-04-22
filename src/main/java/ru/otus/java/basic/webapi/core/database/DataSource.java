@@ -1,8 +1,8 @@
-package ru.otus.java.basic.webapi.application.database;
+package ru.otus.java.basic.webapi.core.database;
 
 import com.zaxxer.hikari.HikariConfig;
 import com.zaxxer.hikari.HikariDataSource;
-import ru.otus.java.basic.webapi.application.Config;
+import ru.otus.java.basic.webapi.core.Config;
 
 import java.sql.Connection;
 import java.sql.SQLException;

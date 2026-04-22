@@ -1,6 +1,6 @@
-package ru.otus.java.basic.webapi.application.server;
+package ru.otus.java.basic.webapi.core.server;
 
-import ru.otus.java.basic.webapi.application.response.Response;
+import ru.otus.java.basic.webapi.core.response.Response;
 
 import java.io.IOException;
 import java.io.OutputStream;

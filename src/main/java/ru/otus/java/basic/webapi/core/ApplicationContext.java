@@ -1,6 +1,6 @@
-package ru.otus.java.basic.webapi.application;
+package ru.otus.java.basic.webapi.core;
 
-import ru.otus.java.basic.webapi.application.database.DataSource;
+import ru.otus.java.basic.webapi.core.database.DataSource;
 import ru.otus.java.basic.webapi.controller.Controller;
 import ru.otus.java.basic.webapi.controller.category.CategoryCreateController;
 import ru.otus.java.basic.webapi.controller.product.*;

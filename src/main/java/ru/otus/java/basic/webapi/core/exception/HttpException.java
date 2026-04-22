@@ -1,6 +1,6 @@
-package ru.otus.java.basic.webapi.application.exception;
+package ru.otus.java.basic.webapi.core.exception;
 
-import ru.otus.java.basic.webapi.application.response.HttpStatus;
+import ru.otus.java.basic.webapi.core.response.HttpStatus;
 
 public abstract class HttpException extends Exception {
     private final HttpStatus status;

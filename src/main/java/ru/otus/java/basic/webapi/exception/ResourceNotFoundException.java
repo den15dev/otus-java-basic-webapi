@@ -1,7 +1,7 @@
 package ru.otus.java.basic.webapi.exception;
 
-import ru.otus.java.basic.webapi.application.exception.HttpException;
-import ru.otus.java.basic.webapi.application.response.HttpStatus;
+import ru.otus.java.basic.webapi.core.exception.HttpException;
+import ru.otus.java.basic.webapi.core.response.HttpStatus;
 
 public class ResourceNotFoundException extends HttpException {
     public ResourceNotFoundException(String message) {

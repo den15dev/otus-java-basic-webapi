@@ -1,4 +1,4 @@
-package ru.otus.java.basic.webapi.application.response;
+package ru.otus.java.basic.webapi.core.response;
 
 public class NoContentResponse extends Response {
     public NoContentResponse() {

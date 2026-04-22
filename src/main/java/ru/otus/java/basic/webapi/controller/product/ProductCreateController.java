@@ -1,10 +1,10 @@
 package ru.otus.java.basic.webapi.controller.product;
 
 import com.google.gson.Gson;
-import ru.otus.java.basic.webapi.application.request.Request;
-import ru.otus.java.basic.webapi.application.response.HttpStatus;
-import ru.otus.java.basic.webapi.application.response.JsonResponse;
-import ru.otus.java.basic.webapi.application.response.Response;
+import ru.otus.java.basic.webapi.core.request.Request;
+import ru.otus.java.basic.webapi.core.response.HttpStatus;
+import ru.otus.java.basic.webapi.core.response.JsonResponse;
+import ru.otus.java.basic.webapi.core.response.Response;
 import ru.otus.java.basic.webapi.controller.Controller;
 import ru.otus.java.basic.webapi.dto.product.ProductInputDto;
 import ru.otus.java.basic.webapi.service.ProductService;

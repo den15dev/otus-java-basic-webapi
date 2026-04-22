@@ -1,11 +1,11 @@
-package ru.otus.java.basic.webapi.application;
+package ru.otus.java.basic.webapi.core;
 
-import ru.otus.java.basic.webapi.application.response.Response;
-import ru.otus.java.basic.webapi.application.routing.Route;
+import ru.otus.java.basic.webapi.core.response.Response;
+import ru.otus.java.basic.webapi.core.routing.Route;
 import ru.otus.java.basic.webapi.controller.Controller;
 import ru.otus.java.basic.webapi.controller.error.NotFoundController;
 import ru.otus.java.basic.webapi.route.Routes;
-import ru.otus.java.basic.webapi.application.request.Request;
+import ru.otus.java.basic.webapi.core.request.Request;
 
 import java.util.Map;
 

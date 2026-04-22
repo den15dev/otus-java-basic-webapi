@@ -1,4 +1,4 @@
-package ru.otus.java.basic.webapi.application.request;
+package ru.otus.java.basic.webapi.core.request;
 
 import java.util.HashMap;
 import java.util.Map;

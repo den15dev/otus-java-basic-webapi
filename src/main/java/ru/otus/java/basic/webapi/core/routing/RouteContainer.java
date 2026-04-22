@@ -1,4 +1,4 @@
-package ru.otus.java.basic.webapi.application.routing;
+package ru.otus.java.basic.webapi.core.routing;
 
 import ru.otus.java.basic.webapi.controller.Controller;
 
