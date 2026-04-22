@@ -1,7 +1,7 @@
 package ru.otus.java.basic.webapi.route;
 
 import ru.otus.java.basic.webapi.core.routing.RouteContainer;
-import ru.otus.java.basic.webapi.controller.category.CategoryCreateController;
+import ru.otus.java.basic.webapi.controller.category.*;
 import ru.otus.java.basic.webapi.controller.product.*;
 
 
@@ -13,7 +13,11 @@ public class Routes extends RouteContainer {
 
 
     private void load() {
+        add("GET", "/categories", CategoryListController.class);
+        add("GET", "/categories/{id}", CategoryShowController.class);
         add("POST", "/categories", CategoryCreateController.class);
+        add("PUT", "/categories/{id}", CategoryUpdateController.class);
+        add("DELETE", "/categories/{id}", CategoryDeleteController.class);
 
         add("GET", "/products", ProductListController.class);
         add("GET", "/products/{id}", ProductShowController.class);

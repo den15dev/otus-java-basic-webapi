@@ -2,7 +2,7 @@ package ru.otus.java.basic.webapi.core;
 
 import ru.otus.java.basic.webapi.core.database.DataSource;
 import ru.otus.java.basic.webapi.controller.Controller;
-import ru.otus.java.basic.webapi.controller.category.CategoryCreateController;
+import ru.otus.java.basic.webapi.controller.category.*;
 import ru.otus.java.basic.webapi.controller.product.*;
 import ru.otus.java.basic.webapi.repository.CategoryRepository;
 import ru.otus.java.basic.webapi.repository.ProductRepository;
@@ -27,6 +27,10 @@ public class ApplicationContext {
         this.controllers = new HashMap<>();
 
         this.controllers.put(CategoryCreateController.class, new CategoryCreateController(categoryService));
+        this.controllers.put(CategoryShowController.class, new CategoryShowController(categoryService));
+        this.controllers.put(CategoryListController.class, new CategoryListController(categoryService));
+        this.controllers.put(CategoryUpdateController.class, new CategoryUpdateController(categoryService));
+        this.controllers.put(CategoryDeleteController.class, new CategoryDeleteController(categoryService));
 
         this.controllers.put(ProductCreateController.class, new ProductCreateController(productService));
         this.controllers.put(ProductShowController.class, new ProductShowController(productService));

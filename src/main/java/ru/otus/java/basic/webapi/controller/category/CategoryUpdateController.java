@@ -1,4 +1,4 @@
-package ru.otus.java.basic.webapi.controller.product;
+package ru.otus.java.basic.webapi.controller.category;
 
 import com.google.gson.Gson;
 import ru.otus.java.basic.webapi.core.exception.HttpException;
@@ -6,17 +6,17 @@ import ru.otus.java.basic.webapi.core.request.Request;
 import ru.otus.java.basic.webapi.core.response.JsonResponse;
 import ru.otus.java.basic.webapi.core.response.Response;
 import ru.otus.java.basic.webapi.controller.Controller;
-import ru.otus.java.basic.webapi.dto.product.ProductInputDto;
-import ru.otus.java.basic.webapi.service.ProductService;
+import ru.otus.java.basic.webapi.dto.category.CategoryInputDto;
+import ru.otus.java.basic.webapi.service.CategoryService;
 
 import java.util.Map;
 
-public class ProductUpdateController extends Controller {
-    private final ProductService productService;
+public class CategoryUpdateController extends Controller {
+    private final CategoryService categoryService;
 
 
-    public ProductUpdateController(ProductService productService) {
-        this.productService = productService;
+    public CategoryUpdateController(CategoryService categoryService) {
+        this.categoryService = categoryService;
     }
 
 
@@ -24,10 +24,10 @@ public class ProductUpdateController extends Controller {
     public Response handle(Request request) {
         int id = Integer.parseInt(request.getUrlParameter("id"));
         Gson gson = new Gson();
-        ProductInputDto productData = gson.fromJson(request.getBody(), ProductInputDto.class);
+        CategoryInputDto categoryData = gson.fromJson(request.getBody(), CategoryInputDto.class);
 
         try {
-            productService.updateProduct(id, productData);
+            categoryService.updateCategory(id, categoryData);
 
             return new JsonResponse(Map.of("id", String.valueOf(id)));
 
