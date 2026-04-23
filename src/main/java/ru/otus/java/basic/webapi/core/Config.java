@@ -17,6 +17,8 @@ public class Config {
             }
             this.properties.load(inputStream);
 
+            overrideByEnvVariables();
+
         } catch (IOException e) {
             throw new RuntimeException("Failed to load configuration file.", e);
         }
@@ -25,5 +27,31 @@ public class Config {
 
     public String get(String key) {
         return this.properties.getProperty(key);
+    }
+
+
+    private void overrideByEnvVariables() {
+        String serverPort = System.getenv().get("APP_PORT");
+        if (serverPort != null) {
+            properties.setProperty("server.port", serverPort);
+        }
+
+        String dbHost = System.getenv().get("DB_HOST");
+        String dbPort = System.getenv().get("DB_PORT");
+        String dbName = System.getenv().get("DB_NAME");
+        if (dbHost != null && dbPort != null && dbName != null) {
+            String dbUrl = "jdbc:postgresql://%s:%s/%s".formatted(dbHost, dbPort, dbName);
+            properties.setProperty("db.url", dbUrl);
+        }
+
+        String dbUsername = System.getenv().get("DB_USERNAME");
+        if (dbUsername != null) {
+            properties.setProperty("db.username", dbUsername);
+        }
+
+        String dbPassword = System.getenv().get("DB_PASSWORD");
+        if (dbPassword != null) {
+            properties.setProperty("db.password", dbPassword);
+        }
     }
 }

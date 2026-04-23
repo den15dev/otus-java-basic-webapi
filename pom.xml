@@ -70,4 +70,8 @@
             <version>2.25.4</version>
         </dependency>
     </dependencies>
+
+    <build>
+        <finalName>otus-java-basic-webapi</finalName>
+    </build>
 </project>
