@@ -1,0 +1,24 @@
+services:
+  java-webapi-app:
+    build:
+      context: .
+      dockerfile: Dockerfile.prod
+    container_name: java-webapi-app
+    restart: unless-stopped
+    env_file:
+      - .env
+    depends_on:
+      - java-webapi-postgres
+    ports:
+      - "127.0.0.1:${APP_HOST_PORT}:${APP_PORT}"
+
+  java-webapi-postgres:
+    image: postgres:17
+    container_name: java-webapi-postgres
+    restart: unless-stopped
+    environment:
+      POSTGRES_DB: ${DB_NAME}
+      POSTGRES_USER: ${DB_USERNAME}
+      POSTGRES_PASSWORD: ${DB_PASSWORD}
+    volumes:
+      - ./var/postgres:/var/lib/postgresql/data

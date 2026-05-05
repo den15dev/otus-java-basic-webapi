@@ -1,0 +1,12 @@
+services:
+  webapi-postgres:
+    image: postgres:17.0
+    container_name: webapi-postgres
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: web_shop
+    ports:
+      - "5436:5432"
+    volumes:
+      - ./var/postgres:/var/lib/postgresql/data
